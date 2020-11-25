@@ -2,13 +2,12 @@ package es.dbiosag.command.domain.model;
 
 import lombok.Builder;
 import lombok.Data;
-
 import javax.persistence.*;
 
-@Builder
 @Data
 @Entity
 @Table(name = "PHONES")
+@Builder
 public class Phone {
 
     @Id

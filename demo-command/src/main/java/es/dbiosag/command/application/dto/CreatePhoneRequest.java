@@ -3,8 +3,8 @@ package es.dbiosag.command.application.dto;
 import lombok.Builder;
 import lombok.Data;
 
-@Builder
 @Data
+@Builder
 public class CreatePhoneRequest {
 
     private String name;

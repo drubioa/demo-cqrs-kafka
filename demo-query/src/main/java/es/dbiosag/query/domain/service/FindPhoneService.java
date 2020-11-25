@@ -1,12 +1,10 @@
 package es.dbiosag.query.domain.service;
 
 import es.dbiosag.query.application.dto.PhoneResponse;
-import es.dbiosag.query.application.exception.FindPhoneException;
 import es.dbiosag.query.domain.converter.PhoneConverter;
 import es.dbiosag.query.domain.exception.PhoneNotFoundException;
 import es.dbiosag.query.domain.model.Phone;
 import es.dbiosag.query.infrastructure.repository.PhoneRepository;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +22,7 @@ public class FindPhoneService {
 
     public PhoneResponse findByName(String name) throws PhoneNotFoundException {
         Optional<Phone> phone = phoneRepository.findByName(name);
-        if(phone.isEmpty()) {
+        if(phone.isPresent()) {
             throw new PhoneNotFoundException(name, "Phone not found");
         }
         log.info("Find phone: {}", phone);
