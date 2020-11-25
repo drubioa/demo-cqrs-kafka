@@ -1,0 +1,20 @@
+server:
+    port: 8081
+spring:
+    datasource:
+        driverClassName: org.h2.Driver
+        password: 1234
+        url: jdbc:h2:mem:commanddb
+        username: sa
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+    h2:
+        console:
+            enabled: true
+
+    kafka:
+        bootstrap-servers: localhost:9092
+        consumer.group-id: phone-producers
+message:
+    topic:
+        createPhone: create-phone
