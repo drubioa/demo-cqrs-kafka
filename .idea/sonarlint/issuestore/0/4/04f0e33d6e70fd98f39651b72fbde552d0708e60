@@ -1,9 +1,0 @@
-
-B
-java:S1165" Make this "message" field final.(ù„è¿ûÿÿÿÿ8íœÉüß.
-M
-java:S1068"+Remove this unused "message" private field.(ù„è¿ûÿÿÿÿ8íœÉüß.
-:
-java:S1165"Make this "name" field final.(Ë¥¼8íœÉüß.
-E
-java:S1068"(Remove this unused "name" private field.(Ë¥¼8íœÉüß.
