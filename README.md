@@ -1,3 +1,8 @@
+<p align="left">
+  <a href="https://github.com/actions/setup-java"><img alt="GitHub Actions status" src="https://github.com/actions/setup-java/workflows/Main%20workflow/badge.svg"></a>
+</p>
+
+
 # Prueba de concepto de CRQR con Apache Kafka
 
 Prueba de concepto de *CQRS* con *Event sourcing*. En esta prueba se dispondrán de dos microservicios desarrollados en mediante Spring Boot (Uno para la parte Command y otro para la parte Query). Ambos microservicios dispondrán de una base de datos en *h2* una orientada a escritura y otra a la lectura.
