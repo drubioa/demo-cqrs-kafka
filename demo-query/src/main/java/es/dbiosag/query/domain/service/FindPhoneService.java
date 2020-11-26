@@ -22,7 +22,7 @@ public class FindPhoneService {
 
     public PhoneResponse findByName(String name) throws PhoneNotFoundException {
         Optional<Phone> phone = phoneRepository.findByName(name);
-        if(phone.isPresent()) {
+        if(!phone.isPresent()) {
             throw new PhoneNotFoundException(name, "Phone not found");
         }
         log.info("Find phone: {}", phone);
