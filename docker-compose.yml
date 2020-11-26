@@ -44,13 +44,24 @@ services:
       - zoo1
       - kafka1
 
-  demo-query:
+  demo-query-1:
     build:
       context: demo-query
       dockerfile: Dockerfile
     image: demo-query
     ports:
       - "8082:8082"
+    depends_on:
+      - zoo1
+      - kafka1
+
+  demo-query-2:
+    build:
+      context: demo-query
+      dockerfile: Dockerfile
+    image: demo-query
+    ports:
+      - "8082:8083"
     depends_on:
       - zoo1
       - kafka1
