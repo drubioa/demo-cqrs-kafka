@@ -1,11 +1,16 @@
 version: '2.1'
 
+networks:
+  test:
+
 services:
   zoo1:
     image: zookeeper:3.4.9
     hostname: zoo1
     ports:
       - "2181:2181"
+    networks:
+      - test
     environment:
       ZOO_MY_ID: 1
       ZOO_PORT: 2181
@@ -22,6 +27,7 @@ services:
     environment:
       KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka1:19092,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_CREATE_TOPICS: create-phone:2:1
       KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
       KAFKA_ZOOKEEPER_CONNECT: "zoo1:2181"
       KAFKA_BROKER_ID: 1
@@ -31,6 +37,13 @@ services:
       - ./zk-single-kafka-single/kafka1/data:/var/lib/kafka/data
     depends_on:
       - zoo1
+    networks:
+      - test
+    healthcheck:
+      test: [ "CMD", "nc", "-vz", "localhost", "9092" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   demo-command:
     build:
@@ -41,27 +54,35 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - zoo1
-      - kafka1
+      kafka1:
+        condition: service_healthy
+    networks:
+      - test
 
   demo-query-1:
     build:
       context: demo-query
       dockerfile: Dockerfile
     image: demo-query
+    hostname: demo-query-1
     ports:
       - "8082:8082"
     depends_on:
-      - zoo1
-      - kafka1
+      kafka1:
+        condition: service_healthy
+    networks:
+      - test
 
   demo-query-2:
     build:
       context: demo-query
       dockerfile: Dockerfile
     image: demo-query
+    hostname: demo-query-2
     ports:
-      - "8082:8083"
+      - "8083:8082"
     depends_on:
-      - zoo1
-      - kafka1
+      kafka1:
+        condition: service_healthy
+    networks:
+      - test

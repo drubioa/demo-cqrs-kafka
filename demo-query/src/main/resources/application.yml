@@ -1,5 +1,5 @@
 server:
-    port: 8083
+    port: 8082
 spring:
     datasource:
         driverClassName: org.h2.Driver
@@ -13,8 +13,9 @@ spring:
             enabled: true
 
     kafka:
-        bootstrap-servers: localhost:9092
-        consumer.group-id: phone-producers
+        bootstrap-servers: kafka1:9092
+        consumer:
+            group-id: test-consumer-group
 message:
     topic:
         createPhone: create-phone
