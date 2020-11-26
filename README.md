@@ -1,5 +1,5 @@
 <p align="left">
-  <a href="https://github.com/actions/demo-cqrs-kafka"><img alt="GitHub Actions status" src="https://github.com/actions/setup-java/workflows/Main%20workflow/badge.svg"></a>
+  <a href="https://github.com/drubioa/demo-cqrs-kafka/actions"><img alt="GitHub Actions status" src="https://github.com/actions/setup-java/workflows/Main%20workflow/badge.svg"></a>
 </p>
 
 
