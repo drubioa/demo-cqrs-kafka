@@ -3,23 +3,15 @@
 </p>
 
 
-# Prueba de concepto de CQRS con Apache Kafka
-
-Prueba de concepto de *CQRS* con *Event sourcing*. En esta prueba se dispondrán de dos microservicios desarrollados en mediante Spring Boot (Uno para la parte Command y otro para la parte Query). Ambos microservicios dispondrán de una base de datos en *h2* una orientada a escritura y otra a la lectura.
-
-Para sincronizar ambas bases de datos dispondremos de un topic de kafka en el que se realizará la comunicación de eventos entre command y query.
+# Demo for CQRS with Spring Boot Projects and  Apache Kafka
+The main propose of this project is test CQRS with Event Sourcing.  
 
 ## Getting Started
 
-La idea principal de esta prueba es realizarla en una máquina local. Para ellos se desplegarán los siguientes contenedores:
+This project consist of two microservices developed in Spring Boot (Once for Command Service and other for Query Services). Each of them has H2 database for Command and Query. 
 
-Para esta prueba de concepto dispondremos de dos microservicios.
-
-### Microservicio Command
-Este servicio dispone de un *endpoint* para crear un nuevo teléfono. Recibe un json con un nuevo teléfono. Lo introducirá en la base de datos de command, y seguidamente creará un evento en un *topic* de *Kafka* el cual actualizará la base de datos de query.
-
-Para probar este microservicio:
-
+### Microservice Command
+Once request for POST new Item, after data was inserted in database, it will publish message in kafka broker. 
 ```
 curl --location --request POST 'localhost:8081/phone' \
 --header 'Content-Type: application/json' \
@@ -30,11 +22,11 @@ curl --location --request POST 'localhost:8081/phone' \
     "price": 800.99
 }'
 ```
+### Microservice Query
+Next the query service Kafka Listener will recive the message and save the new item in query H2 database. 
+In addition we have a endpoint for get Items presents in query database.
 
-### Microservicio Query
-Este microservicio dispone de un endpoint para consultar teléfonos por nombre.
-Además dispone de un *Listener* que está escuchando el topic de kafka y que detecta eventos de creacion de nuevos teléfonos y actualiza la base de datos de query.
-
+This funcionality could be test made POST request to add new Phone in command service.
 ```
 curl --location --request GET 'localhost:8083/phone/iphone12'
 ```
@@ -44,16 +36,11 @@ Esta llamada puede devolver 404 en caso de que no exista el teléfono, o bien 20
 ![Screenshot](resources/diagram.png)
 
 ## Requisitos
-
-Disponer de docker y docker-compose en la máquina en la que se va a realizar la prueba.
+* Docker and docker-compose
 
 ## Instalación
-
-Para la realización de esta prueba disponemos del fichero `docker-compose.yml` en el cual se construye una imagen para un servidor kafka, un zookeeper, un microservicio query y un microservicio command.
-
-Para construir y desplegar en docker las imágenes hay que realizar el siguiente comando:
-
+For make this demo we dispose of `docker-compose.yml`. This *yaml* raise up containers with kafka, zookeepr, a container with query spring-boot project and other with command spring boot project.
 ```bash
-docker-compose up
+docker-compose up -d
 ```
 
