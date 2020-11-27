@@ -35,10 +35,10 @@ Esta llamada puede devolver 404 en caso de que no exista el teléfono, o bien 20
 
 ![Screenshot](resources/diagram.png)
 
-## Requisitos
+## Requirements
 * Docker and docker-compose
 
-## Instalación
+## Install
 For make this demo we dispose of `docker-compose.yml`. This *yaml* raise up containers with kafka, zookeepr, a container with query spring-boot project and other with command spring boot project.
 ```bash
 docker-compose up -d
