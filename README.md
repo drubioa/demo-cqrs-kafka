@@ -3,7 +3,7 @@
 </p>
 
 
-# Demo for CQRS with Spring Boot Projects and  Apache Kafka
+# Demo for CQRS with Spring Boot and Apache Kafka
 The main propose of this project is test CQRS with Event Sourcing.  
 
 ## Getting Started
