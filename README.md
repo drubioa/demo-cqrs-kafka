@@ -31,7 +31,7 @@ curl --location --request POST 'localhost:8081/phone' \
 }'
 ```
 
-### Microsericio Query
+### Microservicio Query
 Este microservicio dispone de un endpoint para consultar teléfonos por nombre.
 Además dispone de un *Listener* que está escuchando el topic de kafka y que detecta eventos de creacion de nuevos teléfonos y actualiza la base de datos de query.
 
