@@ -8,7 +8,7 @@ The main propose of this project is test CQRS with Event Sourcing.
 
 ## Getting Started
 
-This project consist of two microservices developed in Spring Boot (Once for Command Service and other for Query Services). Each of them has H2 database for Command and Query. 
+This project consist of two microservices developed with Spring Boot (Once for Command Service and other for Query Services). Each of them has H2 database for Command and Query. 
 
 ### Microservice Command
 Once request for POST new Item, after data was inserted in database, it will publish message in kafka broker. 
