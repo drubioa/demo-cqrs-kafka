@@ -45,7 +45,7 @@ services:
 
   demo-command:
     build:
-      context: demo-command
+      context: .
       dockerfile: Dockerfile
     image: demo-command
     hostname: demo-command
@@ -59,7 +59,7 @@ services:
 
   demo-query-1:
     build:
-      context: demo-query
+      context: .
       dockerfile: Dockerfile
     image: demo-query
     hostname: demo-query-1
@@ -71,19 +71,19 @@ services:
     networks:
       - kafka_net
 
-  demo-query-2:
-    build:
-      context: demo-query
-      dockerfile: Dockerfile
-    image: demo-query
-    hostname: demo-query-2
-    ports:
-      - "8083:8082"
-    depends_on:
-      kafka1:
-        condition: service_healthy
-    networks:
-      - kafka_net
+#  demo-query-2:
+#    build:
+#      context: demo-query
+#      dockerfile: Dockerfile
+#    image: demo-query
+#    hostname: demo-query-2
+#    ports:
+#      - "8083:8082"
+#    depends_on:
+#      kafka1:
+#        condition: service_healthy
+#    networks:
+#      - kafka_net
 
 networks:
   kafka_net:
