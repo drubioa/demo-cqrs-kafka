@@ -31,8 +31,6 @@ This funcionality could be test made POST request to add new Phone in command se
 curl --location --request GET 'localhost:8083/phone/iphone12'
 ```
 
-Esta llamada puede devolver 404 en caso de que no exista el teléfono, o bien 200 y el json con información del dispositivo.
-
 ![Screenshot](resources/diagram.png)
 
 ## Requirements
