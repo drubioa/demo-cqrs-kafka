@@ -9,8 +9,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @Log4j2
 public class FindPhoneService {
@@ -21,12 +19,9 @@ public class FindPhoneService {
     private PhoneConverter phoneConverter;
 
     public PhoneResponse findByName(String name) throws PhoneNotFoundException {
-        Optional<Phone> phone = phoneRepository.findByName(name);
-        if(!phone.isPresent()) {
-            throw new PhoneNotFoundException(name, "Phone not found");
-        }
+        Phone phone = phoneRepository.findByName(name).orElseThrow(() -> new PhoneNotFoundException(name, "Phone not found"));
         log.info("Find phone: {}", phone);
-        return phoneConverter.phoneToPhoneResponse(phone.get());
+        return phoneConverter.phoneToPhoneResponse(phone);
     }
 
     public void createPhone(Phone p) {

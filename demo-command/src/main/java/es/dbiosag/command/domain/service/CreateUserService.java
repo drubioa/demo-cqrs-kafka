@@ -11,8 +11,6 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-
 @Service
 @Log4j2
 public class CreateUserService {
@@ -24,7 +22,6 @@ public class CreateUserService {
     @Autowired
     private KafkaPhoneCreatedEventSourcing kafkaPhoneCreatedEventSourcing;
 
-    @Transactional
     public PhoneCreatedEvent create(CreatePhoneRequest request) {
         log.info("Creating new phone");
         val phone = phoneConverter.createPhoneRequestRequestToPhone(request);

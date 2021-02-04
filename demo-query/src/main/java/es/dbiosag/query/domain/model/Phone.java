@@ -1,27 +1,19 @@
 package es.dbiosag.query.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
 
 @Data
-@Entity
-@Table(name = "PHONES")
 public class Phone {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "ID_PHONE")
-    private Integer id;
-    @Column(name = "NAME")
+    @JsonIgnore
+    private String id;
     private String name;
-    @Column(name = "MODEL")
     private String model;
-    @Column(name = "COLOR")
     private String color;
-    @Column(name = "PRICE")
     private Double price;
-    @Column(name = "CREATION_DATE")
     private String creationDate;
 
     public Phone(){ }

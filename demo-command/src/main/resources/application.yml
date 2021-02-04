@@ -1,19 +1,16 @@
 server:
     port: 8081
 spring:
-    datasource:
-        driverClassName: org.h2.Driver
-        password: 1234
-        url: jdbc:h2:mem:commanddb
-        username: sa
-    jpa:
-        database-platform: org.hibernate.dialect.H2Dialect
-    h2:
-        console:
-            enabled: true
-
+    data:
+        mongodb:
+            authentication-database: examples
+            database: examples
+            username: api_user
+            password: NdEep0XLpMNKUmgQVa81oDCx7mrSRodh0Z79qdX3
+            host: localhost
+            port: 30000
     kafka:
-        bootstrap-servers: kafka1:9092
+        bootstrap-servers: localhost:29092
         consumer:
             group-id: test-consumer-group
 message:

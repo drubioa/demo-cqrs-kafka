@@ -7,7 +7,7 @@ services:
     ports:
       - "2181:2181"
     networks:
-      - kafka_net
+      - my_network
     environment:
       ZOO_MY_ID: 1
       ZOO_PORT: 2181
@@ -15,6 +15,40 @@ services:
     volumes:
       - ./zk-single-kafka-single/zoo1/data:/data
       - ./zk-single-kafka-single/zoo1/datalog:/datalog
+
+  mongo-command:
+    image: mongo:latest
+    container_name: mongo-command
+    hostname: mongo-command
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+      MONGO_INITDB_DATABASE: examples
+    command: ["--bind_ip_all"]
+    ports:
+      - "30000:27017"
+    networks:
+      - my_network
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./data0:/data/db
+
+  mongo-query:
+    image: mongo:latest
+    container_name: mongo-query
+    hostname: mongo-query
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+      MONGO_INITDB_DATABASE: examples
+    command: ["--bind_ip_all"]
+    ports:
+      - "30001:27017"
+    networks:
+      - my_network
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./data1:/data/db
 
   kafka1:
     image: confluentinc/cp-kafka:5.5.1
@@ -36,55 +70,13 @@ services:
     depends_on:
       - zoo1
     networks:
-      - kafka_net
+      - my_network
     healthcheck:
       test: [ "CMD", "nc", "-vz", "localhost", "9092" ]
       interval: 30s
       timeout: 10s
       retries: 3
 
-  demo-command:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: demo-command
-    hostname: demo-command
-    ports:
-      - "8081:8081"
-    depends_on:
-      kafka1:
-        condition: service_healthy
-    networks:
-      - kafka_net
-
-  demo-query-1:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: demo-query
-    hostname: demo-query-1
-    ports:
-      - "8082:8082"
-    depends_on:
-      kafka1:
-        condition: service_healthy
-    networks:
-      - kafka_net
-
-#  demo-query-2:
-#    build:
-#      context: demo-query
-#      dockerfile: Dockerfile
-#    image: demo-query
-#    hostname: demo-query-2
-#    ports:
-#      - "8083:8082"
-#    depends_on:
-#      kafka1:
-#        condition: service_healthy
-#    networks:
-#      - kafka_net
-
 networks:
-  kafka_net:
+  my_network:
     driver: bridge
