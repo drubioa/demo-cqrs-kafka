@@ -3,7 +3,9 @@
 ![Java CI with Maven](https://github.com/drubioa/demo-cqrs-kafka/workflows/Java%20CI%20with%20Maven/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-The main propose of this project is test CQRS with Event Sourcing.  
+The main propose of this project is test CQRS with Event Sourcing.  This project consists in two spring boot microservices, one to command and other to query. Additionally we deploy and run docker containers for two Mongo databases, an Apache kafka message broker and Apache Zookeeper.
+
+In the next diagram we can show how this project was designed:
 
 ![diagram](./resources/diagram.jpg)
 
