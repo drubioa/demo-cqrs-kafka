@@ -5,6 +5,8 @@
 
 The main propose of this project is test CQRS with Event Sourcing.  
 
+![diagram](./resources/diagram.jpg)
+
 # Starting 🚀
 
 ## Requirements 📋
