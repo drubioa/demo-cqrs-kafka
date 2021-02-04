@@ -1,44 +1,63 @@
-<p align="left">
-  <a href="https://github.com/drubioa/demo-cqrs-kafka/actions"><img alt="GitHub Actions status" src="https://github.com/actions/setup-java/workflows/Main%20workflow/badge.svg"></a>
-</p>
 
+# Demo for CQRS with Spring Boot, Apache Kafka and Mongo
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# Demo for CQRS with Spring Boot and Apache Kafka
 The main propose of this project is test CQRS with Event Sourcing.  
 
-## Getting Started
+# Starting 🚀
 
-This project consist of two microservices developed with Spring Boot (Once for Command Service and other for Query Services). Each of them has H2 database for Command and Query. 
+## Requirements 📋
+To install and run this project you may be installes next requirements:
+- jdk8
+- maven
+- docker and docker-compose
 
-### Microservice Command
-Once request for POST new Item, after data was inserted in database, it will publish message in kafka broker. 
+## Installation 🔧
+To generate jar files run the following command in root path:
+
+```bash
+mvn clean package
+```
+Wait a minute, when you see all containers running yo can launch the Spring Boot microservices:
+
+### Microservice for command
+Run the following command:
+
+```bash
+java -jar demo-command/target/demo-command-0.0.1-SNAPSHOT.jar.original
+```
+
+### Microservice for query
+In other terminal run the following command:
+
+```bash
+java -jar demo-query/target/demo-query-0.0.1-SNAPSHOT.jar.original
+```
+
+
+Next step is download images of *Apache Kafka, Zoookeper and Mongo*. 
+
+```bash
+docker-compose up -d
+```
+
+# Running project ⚙️
+Once all microservice started you can test this serive using the command endpoint and service endpoint. I show you one example for POST and GET http rest requests with curl command:
+
 ```
 curl --location --request POST 'localhost:8081/phone' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "name": "iphone12",
+    "name": "iphone11",
     "model": "11",
     "color": "red",
     "price": 800.99
 }'
 ```
-### Microservice Query
-Next the query service Kafka Listener will recive the message and save the new item in query H2 database. 
-In addition we have a endpoint for get Items presents in query database.
 
-This funcionality could be test made POST request to add new Phone in command service.
 ```
-curl --location --request GET 'localhost:8083/phone/iphone12'
+curl --location --request GET 'localhost:8082/phone/iphone08'
 ```
 
-![Screenshot](resources/diagram.png)
 
-## Requirements
-* Docker and docker-compose
-
-## Install
-For make this demo we dispose of `docker-compose.yml`. This *yaml* raise up containers with kafka, zookeepr, a container with query spring-boot project and other with command spring boot project.
-```bash
-docker-compose up -d
-```
 
