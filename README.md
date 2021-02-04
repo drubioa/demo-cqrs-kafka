@@ -1,5 +1,6 @@
 
 # Demo for CQRS with Spring Boot, Apache Kafka and Mongo
+![Java CI with Maven](https://github.com/drubioa/demo-cqrs-kafka/workflows/Java%20CI%20with%20Maven/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 The main propose of this project is test CQRS with Event Sourcing.  
