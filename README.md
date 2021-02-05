@@ -18,6 +18,12 @@ To generate jar files run the following command in root path:
 ```bash
 mvn clean package
 ```
+Run containers of *Apache Kafka, Zoookeper and Mongo*.
+
+```bash
+docker-compose up -d
+```
+
 Wait a minute, when you see all containers running yo can launch the Spring Boot microservices:
 
 ### Microservice for command
@@ -34,15 +40,8 @@ In other terminal run the following command:
 java -jar demo-query/target/demo-query-0.0.1-SNAPSHOT.jar.original
 ```
 
-
-Next step is download images of *Apache Kafka, Zoookeper and Mongo*. 
-
-```bash
-docker-compose up -d
-```
-
 # Running project ⚙️
-Once all microservice started you can test this serive using the command endpoint and service endpoint. I show you one example for POST and GET http rest requests with curl command:
+Once all microservice started you can test this service using the command endpoint and service endpoint. I show you one example for POST and GET http rest requests with curl command:
 
 ```
 curl --location --request POST 'localhost:8081/phone' \
